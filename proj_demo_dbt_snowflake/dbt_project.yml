@@ -34,5 +34,16 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   proj_demo_dbt_snowflake:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    marts:
+      +materialized: table
+    staging:
       +materialized: view
+
+
+models:
+  jaffle_shop: # this matches the `name:`` config
+    +materialized: view # this applies to all models in the current project
+    marts:
+      +materialized: table # this applies to all models in the `marts/` directory
+      marketing:
+        +schema: marketing # this applies to all models in the `marts/marketing/`` directory
